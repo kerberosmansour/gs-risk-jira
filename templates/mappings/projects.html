@@ -1,0 +1,185 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>Project Mappings</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container-fluid">
+<span class="progType">Programme</span>
+ <span class="tag">Project</span>
+ <span class="epicType">Epic</span>
+ <span class="critical">Risk</span>
+ <span class="high">Vulnerability</span>
+ <span class="taskType">Task</span>
+</div>
+
+<br>
+
+
+<div class="container-fluid">
+
+<table class="table table-condensed" style="empty-cells: hide;">
+  <thead>
+
+    <tr>
+      <th scope="col">Project</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Level 2 </th>
+      <th scope="col">Summary</th>
+      <th scope="col">Level 3 </th>
+      <th scope="col">Summary</th>
+      <th scope="col">Level 4 </th>
+      <th scope="col">Summary</th>
+      <th scope="col">Level 5 </th>
+      <th scope="col">Summary</th>
+      <th scope="col">Level 6 </th>
+      <th scope="col">Summary</th>
+    </tr>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in projectData['items'] %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed" %}
+
+         <tr> 
+            <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"><span class="statusType">{{ item['Key'] }}</a></span><span class="hidden statusType"> {{ item['Issuetype'] }} </span></td>
+            <td class="col-sm-1">{{ item['Summary'] }}</td>
+         </tr>
+      {% for link in item['parent'] %}
+      {% if link['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed" %}
+      {% set parentItem = link['Key'] %}
+      {% set parentSum = link['Summary'] %}
+      {% set parentType = link['Issuetype'] %}
+
+                  <tr>
+                     <td></td>
+                     <td></td>
+                     <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ parentItem }}" target="_blank"><span class="statusType">{{ parentItem }}</a></span> <span class="hidden statusType"> {{parentType}} </span></td>
+                     <td>{{ parentSum}}</td>
+                  </tr>
+
+      {% for item in projectData['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% for linkThree in item['parent'] %}
+      {% if linkThree['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed" %}
+      {% set keyThree = linkThree['Key'] %}
+      {% set sumThree = linkThree['Summary'] %}
+      {% set typeThree = linkThree['Issuetype'] %}
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ keyThree }}" target="_blank"><span class="statusType"> {{ keyThree }}</a></span><span class="hidden statusType"> {{typeThree}} </span></td>
+                    <td>{{sumThree }} </td>
+                  </tr>
+
+      {% for item in projectData['items'] %}
+      {% if keyThree == item['Key'] %}
+      {% for linkFour in item['parent'] %}
+      {% if linkFour['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed" %}
+      {% set keyFour = linkFour['Key'] %}
+      {% set sumFour = linkFour['Summary'] %}
+      {% set typeFour = linkFour['Issuetype'] %}
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ keyFour }}" target="_blank"><span class="statusType">{{ keyFour }}</a></span><span class="hidden statusType"> {{typeFour}} </span></td>
+                    <td>{{ sumFour }}</td>
+                  </tr>
+
+
+      {% for item in projectData['items'] %}
+      {% if keyFour == item['Key'] %}
+      {% for linkFive in item['parent'] %}
+      {% if linkFive['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed"%}
+      {% set keyFive = linkFive['Key'] %}
+      {% set sumFive = linkFive['Summary'] %}
+      {% set typeFive = linkFive['Issuetype'] %}
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ keyFive }}" target="_blank"><span class="statusType">{{ keyFive }}</a></span><span class="hidden statusType"> {{typeFive}} </span></td>
+                    <td>{{ sumFive }}</td>
+                  </tr>
+
+      {% for item in projectData['items'] %}
+      {% if keyFive == item['Key'] %}
+      {% for linkSix in item['parent'] %}
+      {% if linkSix['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != "Project Closed"%}
+      {% set keySix = linkSix['Key'] %}
+      {% set sumSix = linkSix['Summary'] %}
+      {% set typeSix = linkSix['Issuetype'] %}
+
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="typeR col-sm-1"><a href="https://jira.photobox.com/browse/{{ keySix }}" target="_blank"><span class="statusType">{{ keySix }}</a></span><span class="hidden statusType"> {{typeSix}} </span></td>
+                    <td>{{ sumSix }}</td>
+                  </tr>
+
+
+<!--LINK SIX -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %} 
+
+<!--LINK FIVE -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %} 
+<!--LINK FOUR -->              
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %} 
+<!--LINK THREE -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}            
+<!--LINK TWO/ONE -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+  </tbody>
+
+</table>
+
+
+
+</div>
+
+
+
+{% endblock %}

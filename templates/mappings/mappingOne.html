@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>Top Level Risks</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Security Pillar</th>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in new_data['items'] %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "Level1Risk" %}
+         <tr> 
+            <td class="typeR"><a href="{{url_for('mappingsdetail', id=item['Key']) }}" target="_blank">
+
+              <span class="statusType">{{ item['Key'] }}</a></span></td>
+
+            <td >{{ item['Summary'] }}</td>
+            <td >{{ item['Risk Owner'] }}</td>
+
+                  {% for link in item['child'] %}
+                  {% if link['Issuetype'] == 'Pillar' %}
+                  {% set parentItem = link['Summary'] %}
+
+            <td> {{ parentItem}} </td>
+
+         </tr>
+
+
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+{% endblock %}

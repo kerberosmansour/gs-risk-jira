@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center><a href="https://jira.photobox.com/browse/{{key}}" target="_blank">{{key}} {{summary}} </a></center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Risk Rating</th>
+      <th scope="col">Risk Owner</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+  <tbody style="font-size: 14px">
+
+         <tr > 
+            <td >{{rating}}</td>
+            <td>{{owner}}</td>
+            <td class="statusR"><span class="riskStatus">{{status}}</span></td>
+         </tr>
+
+  </tbody>
+</table>
+</div>
+<div class="container">
+<div class="col-md-6">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Child of</th>
+
+    </tr>
+  </thead>
+  <tbody style="font-size: 14px">
+      {% for item in new_data['items'] %}
+      {% if item['Key']|string() == key|string %}
+      {% for link in item['child'] %}
+      {% set childItem = link['Key'] %}
+      {% for item in new_data['items'] %}
+      {% if childItem == item['Key'] %}
+      {% set newKey = item['Key'] %}
+      {% set newSummary = item['Summary'] %}
+         <tr style="background-color: #8fc43d;color: #fff" > 
+            <td ><a href="{{url_for('riskdetail', id=item['Key']) }}">{{ item['Key'] }}</a></td>
+            <td>{{ item['Summary'] }}</td>
+         </tr>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Parent of</th>
+
+    </tr>
+  </thead>
+  <tbody style="font-size: 14px">
+      {% for item in new_data['items'] %}
+      {% if item['Key']|string() == key|string %}
+      {% for link in item['parent'] %}
+      {% set parentItem = link['Key'] %}
+      {% for item in new_data['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% set parentKey = item['Key'] %}
+      {% set parentSummary = item['Summary'] %}
+         <tr style="background-color: #8fc43d;color: #fff" > 
+            <td ><a href="{{url_for('riskdetail', id=item['Key']) }}">{{ item['Key'] }}</a></td>
+            <td> {{ item['Summary'] }}</td>
+         </tr>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+</div>
+
+
+{% endblock %}

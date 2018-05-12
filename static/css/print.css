@@ -1,0 +1,25 @@
+@page { size: auto;  margin: 0mm; }
+
+@media print {
+
+font-family: 'Open Sans', sans-serif;
+
+
+* {
+-webkit-print-color-adjust: exact;
+
+}
+
+body {
+ margin: 20mm 20mm 20mm 20mm;
+}
+
+
+.navbar {display: none;
+}
+
+a { text-decoration: none; }
+
+}
+
+}

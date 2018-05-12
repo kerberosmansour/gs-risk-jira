@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>David Vale Risks</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container-fluid">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Status</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Risk Description</th>
+    </tr>
+  </thead>
+
+  <tbody style="font-size: 14px">
+      {% for item in new_data['items'] %}
+      {% if item['Issuetype'] == 'RISK' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Risk Owner'] == 'David VALE' %}
+      {% set key = item['Key'] %}
+      {% set  rating = item['Rating'] %}
+      {% set  status = item['Status'] %}
+      {% set summary = item['Summary'] %}
+      {% set  description = item['Risk Description'] %}
+        <tr>
+            <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"><span class="typeR"> {{ key }} </span></td>
+            <td class="col-sm-1">{{ rating }}</td>
+            <td class="col-sm-1">{{ status }}</td>
+            <td class="col-sm-3" style="color: #8fc43d"><h4>{{ summary }} </h4></td>
+            <td class="col-sm-6"><h5>{{ description }}</h5></td>
+         </tr>
+
+      {% endif %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+
+
+{% endblock %}

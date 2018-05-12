@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>Level One and Two Risks</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+
+    </tr>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in new_data['items'] %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "Level1Risk" %}
+         <tr> 
+            <td class="typeR col-md-1" ><a href="{{url_for('riskdetail', id=item['Key']) }}"><span class="statusType">{{ item['Key'] }}</a></span> </td>
+            <td>{{ item['Summary'] }}</td>
+         </tr>
+      {% for link in item['parent'] %}
+      {% set parentItem = link['Key'] %}
+      {% for item in new_data['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% set newKey = item['Key'] %}
+      {% set newSummary = item['Summary'] %}
+                  <tr>
+                     <td></td>
+                     <td></td>
+                     <td class="typeR col-md-1"><a href="{{url_for('riskdetail', id=newKey) }}"><span class="statusType">{{ newKey }}</a></span></td>
+                     <td>{{newSummary}}</td>
+                  </tr>
+                   
+      {% endif %}          
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+{% endblock %}

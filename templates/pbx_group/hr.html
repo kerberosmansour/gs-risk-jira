@@ -1,0 +1,163 @@
+{% extends 'layout.html' %}
+{% block title %}Photobox Risks{% endblock %}
+
+{% block content %}
+<br>
+
+<div class="container">
+  <table class="table">
+    <tbody>
+      <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
+          <td><center><h2>{{hrCount}}</h2></center></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+ <span class="tag">PBX-Group-Risk</span>
+ <span class="tag">Human Resources</span>
+ <span class="critical">Critical</span>
+ <span class="high">High</span>
+ <span class="medium">Medium</span>
+ <span class="low">Low</span>
+</div>
+
+
+
+
+<div class="container">
+    <br>
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				 <thead>
+				    <tr>
+
+				      <th scope= "col" style="background-color: #c81837;color: #fff">Key</th>
+				      <th scope= "col" style="background-color: #c81837;color: #fff">Summary</th>
+				      <th scope= "col" style="background-color: #c81837;color: #fff">Risk Owner</th>
+				      <th scope= "col" style="background-color: #c81837;color: #fff">Status</th>
+				    </tr>
+				  </thead>
+					  	<tbody style="font-size: 12px; color: ">
+					  	{% for item in new_data['items'] %}
+					    {% if item['Rating'] == 'Critical' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+					    {% for component in item['Components'] %}
+					    {% if component['name'] == "Human Resources" %}
+						    <tr class="table-primary">
+
+							    <td class="col-md-2"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-md-4"> {{item['Summary']}}</td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Status']}} </span></td>
+
+						    </tr>
+					    {% endif %}
+	  					{% endfor %}
+	  					{% endif %}
+	  					{% endfor %}
+					  </tbody>
+			</table>
+		</div>
+	<div class="col-md-6">
+			<table class="table">
+				 <thead>
+				    <tr>
+
+				      <th scope= "col" style="background-color: #f77524;color: #fff">Key</th>
+				      <th scope= "col" style="background-color: #f77524;color: #fff">Summary</th>
+				      <th scope= "col" style="background-color: #f77524;color: #fff">Risk Owner</th>
+				      <th scope= "col" style="background-color: #f77524;color: #fff">Status</th>
+
+
+				    </tr>
+				  </thead>
+					  	<tbody style="font-size: 12px; color: ">
+					  	{% for item in new_data['items'] %}
+					    {% if item['Rating'] == 'High' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+					    {% for component in item['Components'] %}
+					    {% if component['name'] == "Human Resources" %}
+						    <tr class="table-primary">
+
+							    <td class="col-md-2"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-md-4"> {{item['Summary']}}</td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Status']}} </span></td>
+
+						    </tr>
+					    {% endif %}
+	  					{% endfor %}
+	  					{% endif %}
+	  					{% endfor %}
+					  </tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				 <thead>
+				    <tr>
+				      <th scope= "col" style="background-color: #fcd549;color: #fff">Key</th>
+				      <th scope= "col" style="background-color: #fcd549;color: #fff">Summary</th>
+				      <th scope= "col" style="background-color: #fcd549;color: #fff">Risk Owner</th>
+				      <th scope= "col" style="background-color: #fcd549;color: #fff">Status</th>
+				    </tr>
+				  </thead>
+					  	<tbody style="font-size: 12px; color: ">
+					  	{% for item in new_data['items'] %}
+					    {% if item['Rating'] == 'Medium' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+					    {% for component in item['Components'] %}
+					    {% if component['name'] == "Human Resources" %}
+						    <tr class="table-primary">
+
+							    <td class="col-md-2"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-md-4"> {{item['Summary']}}</td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Status']}} </span></td>
+
+						    </tr>
+					    {% endif %}
+	  					{% endfor %}
+	  					{% endif %}
+	  					{% endfor %}
+					  </tbody>
+			</table>
+		</div>
+	<div class="col-md-6">
+			<table class="table">
+				 <thead>
+				    <tr>
+				      <th scope= "col" style="background-color: #39818e;color: #fff">Key</th>
+				      <th scope= "col" style="background-color: #39818e;color: #fff">Summary</th>
+				      <th scope= "col" style="background-color: #39818e;color: #fff">Risk Owner</th>
+				      <th scope= "col" style="background-color: #39818e;color: #fff">Status</th>
+
+				    </tr>
+				  </thead>
+					  	<tbody style="font-size: 12px; color: ">
+					  	{% for item in new_data['items'] %}
+					    {% if item['Rating'] == 'Low' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+					    {% for component in item['Components'] %}
+					    {% if component['name'] == "Human Resources" %}
+						    <tr class="table-primary">
+
+							    <td class="col-md-2"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-md-4"> {{item['Summary']}}</td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="status col-md-2"><span class="openRisk"> {{item['Status']}} </span></td>
+
+						    </tr>
+					    {% endif %}
+	  					{% endfor %}
+	  					{% endif %}
+	  					{% endfor %}
+					  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

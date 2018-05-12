@@ -1,0 +1,344 @@
+{% extends 'layout.html' %}
+{% block title %}By Brand{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><center><h2>Risks accross Group Brands: {{openRisks}}</h2></center></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class = "container">
+<center>
+	<div class="row">
+	    <div class="col-sm-6">
+		    <img src='{{url_for('static', filename='images/pbxGlogo.png')}}'>
+		   <canvas id="group_risks"></canvas>
+	    </div>
+		 <div class="col-sm-6">
+		    <img src='{{url_for('static', filename='images/photobox logo.png')}}'>
+		   <canvas id="pbx_risks"></canvas>
+		</div>
+  	</div>
+
+  <div class="row">
+     <div class="col-sm-6">
+	    <img src='{{url_for('static', filename='images/moonpig logo.png')}}'>
+	    <canvas id="mp_risks"></canvas>
+	</div>
+	 <div class="col-sm-6">
+	    <img src='{{url_for('static', filename='images/hofmann logo.png')}}'>
+	    <canvas id="hofmann_risks"></canvas>
+  	</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-6">
+	    <img src='{{url_for('static', filename='images/Posterxxl logo.png')}}'>
+	    <canvas id="poster_risks"></canvas>
+    </div>
+  </div>
+ <!-- <div class="row">
+	 <div class="col-sm-6">
+	    <img src='{{url_for('static', filename='images/gs_logo.png')}}'>
+	   <canvas id="gs_risks"></canvas>
+    </div>
+  </div> -->
+
+</center>
+</div>
+
+<script>
+
+		var canvasL = document.getElementById("group_risks");
+		var ctxP = canvasL.getContext('2d');
+		var myRiskgloabl = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{groupData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: "{{groupCount}}"
+		  
+		      }
+		   }
+		});
+
+		canvasL.onclick = function(e) {
+		   var slice = myRiskglobal.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+	var canvasM = document.getElementById("pbx_risks");
+		var ctxP = canvasM.getContext('2d');
+		var myRiskpbx = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{photoboxData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: "{{photoboxCount}}"
+		  
+		      }
+		   }
+		});
+
+		canvasM.onclick = function(e) {
+		   var slice = myRiskpbx.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+	var canvasN = document.getElementById("mp_risks");
+		var ctxP = canvasN.getContext('2d');
+		var myRiskmp = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{moonpigData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: "{{moonpigCount}}"
+		  
+		      }
+		   }
+		});
+
+		canvasN.onclick = function(e) {
+		   var slice = myRiskmp.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+	var canvasO = document.getElementById("hofmann_risks");
+		var ctxP = canvasO.getContext('2d');
+		var myRiskhof = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{hofmannData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: "{{hofmannCount}}"
+		  
+		      }
+		   }
+		});
+
+		canvasO.onclick = function(e) {
+		   var slice = myRiskhof.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+	var canvasP = document.getElementById("poster_risks");
+		var ctxP = canvasP.getContext('2d');
+		var myRiskpos = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{posterData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: '{{posterCount}}'
+		  
+		      }
+		   }
+		});
+
+		canvasP.onclick = function(e) {
+		   var slice = myRiskpos.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+	var canvasQ = document.getElementById("gs_risks");
+		var ctxP = canvasQ.getContext('2d');
+		var myRiskgs = new Chart(ctxP, {
+		   type: 'horizontalBar',
+		   data: {
+		      labels:["Critical","High","Medium","Low","Info","Tbd"],
+		      datasets: [{
+		         data: {{gsData}},
+		         backgroundColor: [
+          			"#c81837",
+      				"#f77524",
+      				"#fcd549",
+      				"#39818e",
+      				"#cccccc",
+      				"#000000"],
+		      }]
+		   },
+			    options: {
+		      		legend: { display: false },
+		      		title: {
+				        display: true,
+				        text: '{{gsCount}}'
+		  
+		      }
+		   }
+		});
+
+/*		canvasQ.onclick = function(e) {
+		   var slice = myRiskgs.getElementAtEvent(e);
+		   if (!slice.length) return; // return if not clicked on slice
+		   var label = slice[0]._model.label;
+		   switch (label) {
+		      // add case for each label/slice
+		      case 'Critical':   
+		         window.open('new.html');
+		         break;
+		      case 'High':	     
+		         window.open('new.html');
+		         break;
+		      case 'Medium':	   
+		       	 window.open('new.html');
+		       	 break;
+		      case 'Low':		 
+		          window.open('new.html');
+					   }
+					}
+
+*/
+</script>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>Risks: 3 Levels</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Key</th>
+      <th scope="col">Summary</th>
+    </tr>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in new_data['items'] %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "Level1Risk" %}
+         <tr> 
+            <td class="typeR col-md-1" ><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"><span class="riskType">{{ item['Key'] }}</a></span> </td>
+            <td>{{ item['Summary'] }}</td>
+         </tr>
+      {% for link in item['parent'] %}
+      {% set parentItem = link['Key'] %}
+
+                  <tr>
+                     <td></td>
+                     <td></td>
+                     <td class="typeR col-md-1"><a href="https://jira.photobox.com/browse/{{ newKey }}" target="_blank"><span class="riskType">{{ parentItem }}</a></span></td>
+
+      {% for item in new_data['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% set newKey = item['Key'] %}
+      {% set newSummary = item['Summary'] %}
+
+                     <td>{{newSummary}} </td>
+                  </tr>
+
+      {% for item in new_data['items'] %}
+      {% if newKey == item['Key'] %}
+      {% for linkThree in item['parent'] %}
+      {% set keyThree = linkThree['Key'] %}
+
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="typeR col-md-1"><a href="https://jira.photobox.com/browse/{{ keyThree}}" target="_blank"><span class="riskType">{{ keyThree }}</a></span></td>
+
+      {% for item in new_data['items'] %}
+      {% if keyThree == item['Key'] %}
+      {% set newKeyThree = item['Key'] %}
+      {% set newSumThree = item['Summary'] %}
+
+                    <td>{{newSumThree}}</td>
+                  </tr>
+
+  
+
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}            
+      {% endif %}          
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+
+</div>
+
+
+
+{% endblock %}

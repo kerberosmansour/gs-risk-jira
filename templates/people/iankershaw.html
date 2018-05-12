@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+  <table class="table">
+    <tbody>
+            <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
+          <td><h2><center>Ian Kershaw</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container-fluid">
+
+<table class="table table-borderless" style="empty-cells: hide;">
+  <thead>
+
+    <tr>
+    <tr>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Level 1 </th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Level 2</th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Level 3</th>
+      <th scope="col" style="background-color: #c81837; color: #fff">Risks</th>
+      <th scope="col" style="background-color: #f77524; color: #fff">Vulnerabilities</th>
+    </tr>
+    </tr>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in new_data['items'] %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "Level1Risk" %}
+         <tr> 
+            <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank">{{ item['Summary'] }}</a></td>
+         </tr>
+
+      {% for link in item['parent'] %}
+      {% if link['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set parentItem = link['Key'] %}
+      {% set parentSum = link['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1"></td>
+                     <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ parentItem }}" target="_blank">{{ parentSum}}</a></td>
+                  </tr>
+
+      {% for item in new_data['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% for linkThree in item['parent'] %}
+      {% if linkThree['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set keyThree = linkThree['Key'] %}
+      {% set sumThree = linkThree['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-1"></td>     
+                    <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ keyThree }}" target="_blank"> {{ sumThree }}</td>
+                    
+                  </tr>
+
+      {% for item in new_data['items'] %}
+      {% if keyThree == item['Key'] %}
+      {% for linkFour in item['parent'] %}
+      {% if linkFour['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Risk Owner'] == 'Ian KERSHAW' %}
+      {% set keyFour = linkFour['Key'] %}
+      {% set sumFour = linkFour['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-1"></td>
+                    <td class="typeR col-sm-2"><a href="https://jira.photobox.com/browse/{{ keyFour }}" target="_blank"><span class="statusType">{{ keyFour }}</a></span><h4> {{ sumFour }}</h4></td>
+                    
+                  </tr>
+
+
+      {% for item in new_data['items'] %}
+      {% if keyFour == item['Key'] %}
+      {% for linkFive in item['parent'] %}
+      {% if linkFive['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set keyFive = linkFive['Key'] %}
+      {% set sumFive = linkFive['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-1"></td>
+                    <td class="col-sm-2"></td>
+                    <td class="typeR col-sm-2"><a href="https://jira.photobox.com/browse/{{ keyFive }}" target="_blank"><span class="statusType">{{ keyFive }}</a></span><h5> {{ sumFive }}</h5></td>        
+                  </tr>
+
+
+
+
+
+<!--LINK FIVE -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %} 
+<!--LINK FOUR -->              
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %} 
+<!--LINK THREE -->
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}            
+<!--LINK TWO/ONE -->
+{% endif %}      
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+
+
+
+{% endblock %}

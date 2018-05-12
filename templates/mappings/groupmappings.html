@@ -1,0 +1,211 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
+          <td><h2><center>Group Risk Mappings</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container-fluid">
+
+<table class="table table-borderless">
+  <thead>
+
+    <tr>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Top Risk </th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff"></th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Risk Taxomony</th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff"></th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Service Level</th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff"></th>
+      <th scope="col" style="background-color: #c81837; color: #fff">Risks</th>
+      <th scope="col" style="background-color: #c81837; color: #fff"></th>
+      <th scope="col" style="background-color: #f77524; color: #fff">Evidence</th>
+      <th scope="col" style="background-color: #f77524; color: #fff"></th>
+    </tr>
+  </thead>
+  <tbody style="font-size: 12px">
+      {% for item in new_data['items'] %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "Level1Risk" %}
+         <tr> 
+
+            <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none; color: #000"> 
+            {{ item['Summary'] }}</td>
+
+            <td class="typeR col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> 
+              <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"><span class="statusType">{{ item['Key'] }}</a></span></td>
+
+         </tr>
+
+      {% for link in item['parent'] %}
+      {% if link['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set parentItem = link['Key'] %}
+      {% set parentSum = link['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                     <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                     <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> 
+                     {{ parentSum}}</td>
+
+                     <td class="typeR col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> 
+                      <a href="https://jira.photobox.com/browse/{{ parentItem }}" target="_blank"><span class="statusType">{{ parentItem }}</a></span></td>
+
+                  </tr>
+
+
+      {% for item in new_data['items'] %}
+      {% if parentItem == item['Key'] %}
+      {% for linkThree in item['parent'] %}
+      {% if linkThree['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set keyThree = linkThree['Key'] %}
+      {% set sumThree = linkThree['Summary'] %}
+
+
+
+
+
+                  <tr>
+                    <td class="col-sm-1 borders" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"></td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000">  </td>   
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000">  
+                    {{ sumThree }}</td>
+
+                    <td class="typeR col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> 
+                      <a href="https://jira.photobox.com/browse/{{ keyThree }}" target="_blank"><span class="statusType"> {{ keyThree }}</a></span></td>
+                    
+                  </tr>
+  
+
+      {% for item in new_data['items'] %}
+      {% if keyThree == item['Key'] %}
+      {% for linkFour in item['parent'] %}
+      {% if linkFour['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set keyFour = linkFour['Key'] %}
+
+      {% for item in new_data['items'] %}
+      {% if keyFour == item['Key'] %}
+      {% for component in item['Components'] %}
+      {% if component['name'] == "PBX-Group-Risk" %}
+
+      {% set newKey = item['Key'] %}
+      {% set newSum = item['Summary'] %}
+
+
+
+
+                  <tr>
+                    <td class="col-sm-1 borders" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000">  </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000">  </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> 
+                    {{ newSum }}</td>
+
+                    <td class="typeR col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> 
+                      <a href="https://jira.photobox.com/browse/{{ newKey }}" target="_blank"><span class="statusType">{{ newKey }}</a></span></td>
+                    
+                  </tr>
+
+
+      {% for item in new_data['items'] %}
+      {% if keyFour == item['Key'] %}
+      {% for linkFive in item['parent'] %}
+      {% if linkFive['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% set keyFive = linkFive['Key'] %}
+      {% set sumFive = linkFive['Summary'] %}
+
+                  <tr>
+                    <td class="col-sm-1 borders" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> </td>
+
+                    <td class="col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-right-style:none; border-bottom-style:none;  color: #000"> 
+                    {{ sumFive }}</td>
+
+                    <td class="typeR col-sm-1" style=" border-style:solid; border-color:#8fc43d; border-left-style:none; border-bottom-style:none;  color: #000"> 
+                      <a href="https://jira.photobox.com/browse/{{ keyFive }}" target="_blank"><span class="statusType">{{ keyFive }}</a></span></td>
+                    
+                  </tr>
+
+
+{% endif %}  
+{% endfor %} 
+{% endif %}  
+{% endfor %} 
+
+{% endif %}  
+{% endfor %} 
+{% endif %}  
+{% endfor %} 
+
+
+            
+<!--LINK TWO/ONE -->
+{% endif %}  
+{% endfor %} 
+{% endif %}  
+{% endfor %} 
+
+
+{% endif %}  
+{% endfor %}   
+{% endif %}      
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+
+
+  </tbody>
+
+</table>
+
+</div>
+
+
+
+{% endblock %}

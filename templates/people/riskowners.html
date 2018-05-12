@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}Risk Detail{% endblock %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr style="background-color: #8fc43d; color: #fff">
+          <td><h2><center>All Risk Owners</center><h2></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container-fluid">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+
+  <tbody style="font-size: 14px">
+
+
+      {% for item in new_data['items'] %}
+      {% set name = item['Risk Owner'] %}
+
+        <tr>
+            <td>{{ name }}</td>
+         </tr>
+
+
+      {% endfor %}
+
+  </tbody>
+
+</table>
+
+</div>
+
+
+{% endblock %}

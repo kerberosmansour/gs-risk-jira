@@ -1,0 +1,8 @@
+venv\
+__pychache__\
+juypter\
+config.py
+*.json
+*.csv
+tmp\
+.ipynb_checkpoints\
