@@ -205,3 +205,8 @@ border-style: solid;
 border-color: #8fc43d;
 
 }
+
+.col-risk-key     { width     :  75px                         ; }
+.col-risk-summary { width     :  350px                        ; }
+.col-risk-owner   { width     :  150px                        ; }
+.col-risk-status  { width     :  150px                        ; }
