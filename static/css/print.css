@@ -2,24 +2,19 @@
 
 @media print {
 
-font-family: 'Open Sans', sans-serif;
-
-
-* {
--webkit-print-color-adjust: exact;
-
-}
-
-body {
- margin: 20mm 20mm 20mm 20mm;
-}
-
-
-.navbar {display: none;
-}
-
-a { text-decoration: none; }
-
-}
-
+    @page             { margin-top: 10px                          ; }
+    *                 { -webkit-print-color-adjust: exact         ; }
+    body              { font-family    : 'Open Sans', sans-serif  ;
+                        margin         : 50px                     ; }
+    .navbar           { display        : none                     ; }
+    a                 { text-decoration: none                     ; }
+    table             { width          : 100%                     ; }
+    #title-table h1   { padding-top    : 20px                     ; }
+    #risks-table th   { padding-bottom : 4px                      ; }
+    #risk-legend      { margin-Top     : 2px                      ;
+                        margin-left    : 2px                      ; }
+    .col-risk-key     { width     :  75px                         ; }
+    .col-risk-summary { width     :  350px                        ; }
+    .col-risk-owner   { width     :  100px                        ; }
+    .col-risk-status  { width     :  100px                        ; }
 }

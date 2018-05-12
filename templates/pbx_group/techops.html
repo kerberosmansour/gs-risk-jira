@@ -2,19 +2,19 @@
 {% block title %}Photobox Risks{% endblock %}
 
 {% block content %}
-<br>
 
+<br>
 <div class="container-fluid">
-  <table class="table">
+  <table class="table" id="title-table">
     <tbody>
       <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
-          <td><center><h2>{{techopsCount}}</h2></center></td>
+          <td><center><h1>{{techopsCount}}</h1></center></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="risk-legend">
  <span class="tag">PBX-Group-Risk</span>
  <span class="tag">TechOps</span>
  <span class="critical">Critical</span>
@@ -26,68 +26,68 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="risks-table">
     <br>
 	<div class="row">
 		<div class="col-md-12">
+            <h3>Critical Risks</h3>
 			<table class="table">
 				 <thead>
 				    <tr>
 
-				      <th scope= "col" style="background-color: #c81837;color: #fff">Key</th>
-				      <th scope= "col" style="background-color: #c81837;color: #fff">Summary</th>
-				      <th scope= "col" style="background-color: #c81837;color: #fff">Risk Description</th>
-				      <th scope= "col" style="background-color: #c81837;color: #fff">Risk Owner</th>
-				      <th scope= "col" style="background-color: #c81837;color: #fff">Status</th>
+				      <th class ='col-risk-key'         scope= "col" style="background-color: #c81837;color: #fff">Key</th>
+				      <th class ='col-risk-summary'     scope= "col" style="background-color: #c81837;color: #fff">Summary</th>
+				      <th class ='col-risk-owner'       scope= "col" style="background-color: #c81837;color: #fff">Risk Owner</th>
+				      <th class ='col-risk-status'      scope= "col" style="background-color: #c81837;color: #fff">Status</th>
+                      <th class ='col-risk-description' scope= "col" style="background-color: #c81837;color: #fff">Risk Description</th>
 				    </tr>
 				  </thead>
-					  	<tbody style="font-size: 12px; color: ">
+					  	<tbody style="font-size: 12px;">
 					  	{% for item in new_data['items'] %}
-					    {% if item['Rating'] == 'Critical' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
-					    {% for component in item['Components'] %}
-					    {% if component['name'] == "TechOps"or component['name'] == "PBX-Webops" %}
-						    <tr class="table-primary">
-
-							    <td class="col-md-1"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
-							    <td class="col-md-3"> {{item['Summary']}}</td>
-							    <td class="col-md-6"> {{ item['Risk Description'] }} </td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Status']}} </span></td>
-
-						    </tr>
-					    {% endif %}
-	  					{% endfor %}
-	  					{% endif %}
+                            {% if item['Rating'] == 'Critical' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+                                {% for component in item['Components'] %}
+                                    {% if component['name'] == "TechOps"or component['name'] == "PBX-Webops" %}
+                                        <tr class="table-primary">
+                                            <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+                                            <td class="col-risk-summary"    > {{item['Summary']}}</td>
+                                            <td class="col-risk-owner"      ><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+                                            <td class="col-risk-status"     ><span class="openRisk"> {{item['Status']}} </span></td>
+                                            <td class="col-risk-description"> {{ item['Risk Description'] }} </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
 	  					{% endfor %}
 					  </tbody>
 			</table>
 		</div>
-	<div class="col-md-12">
+    </div >
+    <div class="row">
+        <h3>High Risks</h3>
+	    <div class="col-md-12">
 			<table class="table">
 				 <thead>
 				    <tr>
 
-				      <th scope= "col" style="background-color: #f77524;color: #fff">Key</th>
-				      <th scope= "col" style="background-color: #f77524;color: #fff">Summary</th>
-				      <th scope= "col" style="background-color: #f77524;color: #fff">Risk Description</th>
-				      <th scope= "col" style="background-color: #f77524;color: #fff">Risk Owner</th>
-				      <th scope= "col" style="background-color: #f77524;color: #fff">Status</th>
-
-
+				      <th class="col-risk-key"         scope="col" style="background-color: #f77524;color: #fff">Key</th>
+				      <th class="col-risk-summary"     scope="col" style="background-color: #f77524;color: #fff">Summary</th>
+				      <th class="col-risk-owner"       scope="col" style="background-color: #f77524;color: #fff">Risk Owner</th>
+				      <th class="col-risk-status"      scope="col" style="background-color: #f77524;color: #fff">Status</th>
+                      <th class="col-risk-description" scope="col" style="background-color: #f77524;color: #fff">Risk Description</th>
 				    </tr>
 				  </thead>
-					  	<tbody style="font-size: 12px; color: ">
+					  	<tbody style="font-size: 12px;">
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'High' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
 					    {% if component['name'] == "TechOps"or component['name'] == "PBX-Webops" %}
 						    <tr class="table-primary">
 
-							    <td class="col-md-1"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
-							    <td class="col-md-3"> {{item['Summary']}}</td>
-							    <td class="col-md-6"> {{ item['Risk Description'] }} </td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Status']}} </span></td>
+							    <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-risk-summary"    > {{item['Summary']}}</td>
+							    <td class="col-risk-owner"      ><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="col-risk-status"     ><span class="openRisk"> {{item['Status']}} </span></td>
+                                <td class="col-risk-description"> {{ item['Risk Description'] }} </td>
 
 						    </tr>
 					    {% endif %}
@@ -101,28 +101,29 @@
 
 	<div class="row">
 		<div class="col-md-12">
+            <h3>Medium Risks</h3>
 			<table class="table">
 				 <thead>
 				    <tr>
-				      <th scope= "col" style="background-color: #fcd549;color: #fff">Key</th>
-				      <th scope= "col" style="background-color: #fcd549;color: #fff">Summary</th>
-				      <th scope= "col" style="background-color: #fcd549;color: #fff">Risk Description</th>
-				      <th scope= "col" style="background-color: #fcd549;color: #fff">Risk Owner</th>
-				      <th scope= "col" style="background-color: #fcd549;color: #fff">Status</th>
+				      <th class="col-risk-key"         scope= "col" style="background-color: #fcd549;color: #fff">Key</th>
+				      <th class="col-risk-summary"     scope= "col" style="background-color: #fcd549;color: #fff">Summary</th>
+				      <th class="col-risk-owner"       scope= "col" style="background-color: #fcd549;color: #fff">Risk Owner</th>
+				      <th class="col-risk-status"      scope= "col" style="background-color: #fcd549;color: #fff">Status</th>
+                      <th class="col-risk-description" scope= "col" style="background-color: #fcd549;color: #fff">Risk Description</th>
 				    </tr>
 				  </thead>
-					  	<tbody style="font-size: 12px; color: ">
+					  	<tbody style="font-size: 12px;">
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'Medium' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
 					    {% if component['name'] == "TechOps"or component['name'] == "PBX-Webops" %}
 						    <tr class="table-primary">
 
-							    <td class="col-md-1"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
-							    <td class="col-md-3"> {{item['Summary']}}</td>
-							    <td class="col-md-6"> {{ item['Risk Description'] }} </td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Status']}} </span></td>
+							    <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-risk-summary"    > {{item['Summary']}}</td>
+							    <td class="col-risk-owner"      ><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="col-risk-status"     ><span class="openRisk"> {{item['Status']}} </span></td>
+                                <td class="col-risk-description"> {{ item['Risk Description'] }} </td>
 
 						    </tr>
 					    {% endif %}
@@ -132,30 +133,33 @@
 					  </tbody>
 			</table>
 		</div>
-	<div class="col-md-12">
+    </div>
+    <div class="row">
+	    <div class="col-md-12">
+            <h3>Low Risks</h3>
 			<table class="table">
 				 <thead>
 				    <tr>
-				      <th scope= "col" style="background-color: #39818e;color: #fff">Key</th>
-				      <th scope= "col" style="background-color: #39818e;color: #fff">Summary</th>
-				      <th scope= "col" style="background-color: #39818e;color: #fff">Risk Description</th>
-				      <th scope= "col" style="background-color: #39818e;color: #fff">Risk Owner</th>
-				      <th scope= "col" style="background-color: #39818e;color: #fff">Status</th>
+				      <th class="col-risk-key"         scope= "col" style="background-color: #39818e;color: #fff">Key</th>
+				      <th class="col-risk-summary"     scope= "col" style="background-color: #39818e;color: #fff">Summary</th>
+				      <th class="col-risk-owner"       scope= "col" style="background-color: #39818e;color: #fff">Risk Owner</th>
+				      <th class="col-risk-status"      scope= "col" style="background-color: #39818e;color: #fff">Status</th>
+                      <th class="col-risk-description" scope= "col" style="background-color: #39818e;color: #fff">Risk Description</th>
 
 				    </tr>
 				  </thead>
-					  	<tbody style="font-size: 12px; color: ">
+					  	<tbody style="font-size: 12px;">
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'Low' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
 					    {% if component['name'] == "TechOps"or component['name'] == "PBX-Webops" %}
 						    <tr class="table-primary">
 
-							    <td class="col-md-1"> <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
-							    <td class="col-md-3"> {{item['Summary']}}</td>
-							    <td class="col-md-6"> {{ item['Risk Description'] }} </td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Risk Owner']}} </span></td>
-							    <td class="status col-md-1"><span class="openRisk"> {{item['Status']}} </span></td>
+							    <td class="col-risk-key"         > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
+							    <td class="col-risk-summary"     > {{item['Summary']}}</td>
+							    <td class="col-risk-owner"       ><span class="openRisk"> {{item['Risk Owner']}} </span></td>
+							    <td class="col-risk-status"      ><span class="openRisk"> {{item['Status']}} </span></td>
+                                <td class="col-risk-description" > {{ item['Risk Description'] }} </td>
 
 						    </tr>
 					    {% endif %}

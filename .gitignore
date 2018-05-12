@@ -6,3 +6,4 @@ config.py
 *.csv
 tmp\*
 .ipynb_checkpoints\*
+*.pyc
