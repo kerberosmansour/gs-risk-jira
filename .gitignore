@@ -1,8 +1,8 @@
-venv\
-__pychache__\
-juypter\
+venv\*
+__pychache__\*
+juypter\*
 config.py
 *.json
 *.csv
-tmp\
-.ipynb_checkpoints\
+tmp\*
+.ipynb_checkpoints\*
